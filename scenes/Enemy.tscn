@@ -1,8 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://cq0ih3tvjf6ic"]
+[gd_scene load_steps=6 format=3 uid="uid://cq0ih3tvjf6ic"]
 
 [ext_resource type="Script" uid="uid://bb1wrbbcgolg4" path="res://src/Enemy.gd" id="1_3gvst"]
+[ext_resource type="Script" uid="uid://cdwj78lqlau54" path="res://src/Combatant.gd" id="2_mpr68"]
+[ext_resource type="Texture2D" uid="uid://bumh5if4xovdf" path="res://icon.svg" id="3_ft8do"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5wwv6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ft8do")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_1vja8"]
+script = ExtResource("2_mpr68")
+sprite_frames = SubResource("SpriteFrames_5wwv6")
+metadata/_custom_type_script = "uid://cdwj78lqlau54"
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_3gvst")
+details = SubResource("Resource_1vja8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

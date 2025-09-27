@@ -1,4 +1,4 @@
-extends Resource
+class_name Combatant extends Resource
 
 @export var health: int
 @export var name: String
