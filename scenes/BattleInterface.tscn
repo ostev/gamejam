@@ -1,6 +1,51 @@
-[gd_scene load_steps=2 format=3 uid="uid://budt11vpa7l0x"]
+[gd_scene load_steps=11 format=3 uid="uid://budt11vpa7l0x"]
 
-[ext_resource type="Texture2D" uid="uid://bumh5if4xovdf" path="res://icon.svg" id="1_7moto"]
+[ext_resource type="PackedScene" uid="uid://cbhlkm2jg87li" path="res://scenes/CombatantUI.tscn" id="1_7moto"]
+[ext_resource type="Script" uid="uid://l08hv0qk8605" path="res://src/EncounterUIManager.gd" id="1_itadv"]
+[ext_resource type="Script" uid="uid://c857khtsisd6s" path="res://src/CombatantDetails.gd" id="2_2u5e8"]
+[ext_resource type="Script" uid="uid://bt4e3r06vflvt" path="res://src/Encounter.gd" id="2_107yi"]
+[ext_resource type="Texture2D" uid="uid://d1uskpen07acg" path="res://assets/hector_frontview.png" id="3_w3uxd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fix10"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_w3uxd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_0kfng"]
+script = ExtResource("2_2u5e8")
+max_hp = 40
+name = "Hector"
+sprite_frames = SubResource("SpriteFrames_fix10")
+metadata/_custom_type_script = "uid://c857khtsisd6s"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3tund"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_w3uxd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_jelp1"]
+script = ExtResource("2_2u5e8")
+max_hp = 30
+name = "Slime"
+sprite_frames = SubResource("SpriteFrames_3tund")
+metadata/_custom_type_script = "uid://c857khtsisd6s"
+
+[sub_resource type="Resource" id="Resource_v40jm"]
+script = ExtResource("2_107yi")
+combatants = [SubResource("Resource_0kfng"), SubResource("Resource_jelp1")]
+metadata/_custom_type_script = "uid://bt4e3r06vflvt"
 
 [node name="BattleInterface" type="Control"]
 layout_mode = 3
@@ -9,6 +54,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_itadv")
+encounter = SubResource("Resource_v40jm")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -25,48 +72,46 @@ horizontal_alignment = 3
 vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -550.0
-offset_top = -724.0
-offset_right = 550.0
-grow_horizontal = 2
-grow_vertical = 0
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_top = 100
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 100
+theme_override_constants/separation = 700
+
+[node name="CombatantUI1" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_7moto")]
+layout_mode = 2
+
+[node name="CombatantUI2" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_7moto")]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/ButtonsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Bitey bitey"
+
+[node name="Button2" type="Button" parent="MarginContainer/HBoxContainer/ButtonsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Stabby stabby"
+
+[node name="Button3" type="Button" parent="MarginContainer/HBoxContainer/ButtonsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Slurpy slurpy"
+
+[node name="Button4" type="Button" parent="MarginContainer/HBoxContainer/ButtonsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "End turn"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 600)
-layout_mode = 2
-texture = ExtResource("1_7moto")
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Arthur"
-horizontal_alignment = 1
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 600)
-layout_mode = 2
-texture = ExtResource("1_7moto")
-stretch_mode = 4
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Arthur"
-horizontal_alignment = 1
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ButtonsContainer/Button" to="." method="_on_bitey_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ButtonsContainer/Button4" to="." method="_on_end_turn_pressed"]

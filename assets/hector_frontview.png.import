@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1uskpen07acg"
-path="res://.godot/imported/hector_frontview.png.png-52dd3ffed6d0ff74f84126222eb111c5.ctex"
+path="res://.godot/imported/hector_frontview.png-5481358b6687a2f0b7c5d8e915d26132.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hector_frontview.png.png"
-dest_files=["res://.godot/imported/hector_frontview.png.png-52dd3ffed6d0ff74f84126222eb111c5.ctex"]
+source_file="res://assets/hector_frontview.png"
+dest_files=["res://.godot/imported/hector_frontview.png-5481358b6687a2f0b7c5d8e915d26132.ctex"]
 
 [params]
 

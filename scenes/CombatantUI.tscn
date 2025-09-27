@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbhlkm2jg87li"]
+
+[ext_resource type="Script" uid="uid://dqqn7dh56srr6" path="res://src/CombatantUI.gd" id="1_ck3ju"]
+[ext_resource type="Texture2D" uid="uid://d1uskpen07acg" path="res://assets/hector_frontview.png" id="2_ck3ju"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4e56r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ck3ju")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ck3ju"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4e56r"]
+bg_color = Color(0.89524317, 0.23186323, 0.48749578, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="CombatantUI" type="Control" node_paths=PackedStringArray("animated_sprite")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ck3ju")
+animated_sprite = NodePath("VBoxContainer/MarginContainer/AnimatedSprite2D")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 700)
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="VBoxContainer/MarginContainer"]
+position = Vector2(90.99999, 0.99999994)
+scale = Vector2(20, 20)
+sprite_frames = SubResource("SpriteFrames_4e56r")
+centered = false
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Hector"
+horizontal_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+theme_override_styles/background = SubResource("StyleBoxFlat_ck3ju")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4e56r")
+max_value = 50.0
+value = 48.0
+show_percentage = false
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HealthBar"]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthLabel" type="Label" parent="VBoxContainer/HealthBar/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "48/50"
+horizontal_alignment = 1
