@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://fmjpqplg4jy"]
+
+[ext_resource type="Script" uid="uid://dooo3vhs5c4en" path="res://tiltepage.gd" id="1_61e0h"]
+[ext_resource type="Texture2D" uid="uid://bkgx164hgv2k8" path="res://assets/title_art.png" id="2_syc5u"]
+[ext_resource type="Script" uid="uid://c3p74idfwcoxt" path="res://scenes/writing.gd" id="3_l8qqo"]
+
+[node name="context" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_61e0h")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1085.0
+texture = ExtResource("2_syc5u")
+expand_mode = 3
+
+[node name="nextone" type="Button" parent="."]
+layout_mode = 0
+offset_left = 479.0
+offset_top = 914.0
+offset_right = 1449.0
+offset_bottom = 1038.0
+theme_override_font_sizes/font_size = 90
+text = "Yes, I want to go back"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 459.0
+offset_top = 263.0
+offset_right = 1659.0
+offset_bottom = 879.0
+theme_override_font_sizes/normal_font_size = 70
+text = "... I fear you fell a great ways
+... you must have hurt your head. 
+Are you alright? ...
+You must want to go back.
+
+"
+script = ExtResource("3_l8qqo")
+
+[connection signal="pressed" from="nextone" to="." method="_on_nextone_pressed"]

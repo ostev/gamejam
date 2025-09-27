@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://c725h5khi3xtm"]
+
+[ext_resource type="Script" uid="uid://dooo3vhs5c4en" path="res://tiltepage.gd" id="1_4ignj"]
+[ext_resource type="Texture2D" uid="uid://bkgx164hgv2k8" path="res://assets/title_art.png" id="2_wosw1"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4ignj")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1914.0
+offset_bottom = 1086.0
+texture = ExtResource("2_wosw1")
+
+[node name="start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 653.0
+offset_top = 788.0
+offset_right = 1326.0
+offset_bottom = 936.0
+theme_override_font_sizes/font_size = 90
+text = "Start!"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 478.0
+offset_top = 417.0
+offset_right = 1640.0
+offset_bottom = 762.0
+theme_override_font_sizes/normal_font_size = 150
+text = "The Merchant"
+
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
