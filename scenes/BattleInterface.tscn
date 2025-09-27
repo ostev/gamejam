@@ -87,31 +87,37 @@ layout_mode = 2
 [node name="CombatantUI2" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_7moto")]
 layout_mode = 2
 
-[node name="ButtonsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/ButtonsContainer"]
+[node name="ButtonsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/ButtonsContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 80
 text = "Bitey bitey"
 
-[node name="Button2" type="Button" parent="MarginContainer/HBoxContainer/ButtonsContainer"]
+[node name="Button2" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/ButtonsContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 80
 text = "Stabby stabby"
 
-[node name="Button3" type="Button" parent="MarginContainer/HBoxContainer/ButtonsContainer"]
+[node name="Button3" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/ButtonsContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 80
 text = "Slurpy slurpy"
 
-[node name="Button4" type="Button" parent="MarginContainer/HBoxContainer/ButtonsContainer"]
+[node name="Button4" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/ButtonsContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 80
 text = "End turn"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="ActionPointsLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Action points: 3"
+horizontal_alignment = 1
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/ButtonsContainer/Button" to="." method="_on_bitey_button_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/ButtonsContainer/Button4" to="." method="_on_end_turn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ButtonsContainer/Button" to="." method="_on_bitey_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ButtonsContainer/Button4" to="." method="_on_end_turn_pressed"]

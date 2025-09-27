@@ -30,3 +30,6 @@ func _set_hp(new_hp: int) -> void:
 	hp = new_hp
 	health_bar.value = new_hp
 	health_label.text = "%s/%s" % [new_hp, details.max_hp]
+
+func act(other: CombatantUI) -> void:
+	other.damage(5)
