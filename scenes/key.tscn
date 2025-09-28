@@ -30,7 +30,6 @@ size = Vector2(30, 47)
 
 [node name="Key" type="Node2D"]
 script = ExtResource("1_fttkb")
-value = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_brs3p")
