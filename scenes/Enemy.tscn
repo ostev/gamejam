@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cq0ih3tvjf6ic"]
 
 [ext_resource type="Script" uid="uid://bb1wrbbcgolg4" path="res://src/Enemy.gd" id="1_3gvst"]
-[ext_resource type="Script" uid="uid://cdwj78lqlau54" path="res://src/Combatant.gd" id="2_mpr68"]
+[ext_resource type="Script" uid="uid://c857khtsisd6s" path="res://src/CombatantDetails.gd" id="2_mpr68"]
 [ext_resource type="Texture2D" uid="uid://bumh5if4xovdf" path="res://icon.svg" id="3_ft8do"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5wwv6"]

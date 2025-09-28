@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://b6tu7dcha7y51"]
+
+[ext_resource type="Texture2D" uid="uid://hgqjt7kf0wp6" path="res://assets/slime_spritesheet.png" id="1_xp87q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrtoj"]
+atlas = ExtResource("1_xp87q")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4b1j"]
+atlas = ExtResource("1_xp87q")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0d7e"]
+atlas = ExtResource("1_xp87q")
+region = Rect2(32, 0, 16, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrtoj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4b1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0d7e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

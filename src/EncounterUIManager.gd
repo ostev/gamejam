@@ -1,4 +1,4 @@
-extends Control
+class_name EncounterUIManager extends Control
 
 @export var encounter: Encounter
 @onready var combatant1: CombatantUI = $MarginContainer/HBoxContainer/CombatantUI1
@@ -21,6 +21,7 @@ func _ready() -> void:
 
 func set_combatant_details(index: int, combatant: CombatantUI) -> void:
 	combatant.details = encounter.combatants[index]
+	combatant.encounter_manager = self
 	combatant.set_details()
 
 func _is_player_turn() -> bool:
@@ -55,3 +56,9 @@ func _on_bitey_button_pressed() -> void:
 	if _can_perform_action():
 		_perform_action()
 		combatant2.damage(5)
+
+func kill(index):
+	if index == 0:
+		get_tree().change_scene_to_file("res://scenes/World.tscn")
+	elif index == 1:
+		get_tree().change_scene_to_file("res://scenes/Win.tscn")

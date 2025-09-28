@@ -1,18 +1,22 @@
-[gd_scene load_steps=35 format=4 uid="uid://qp37dgj8cpxa"]
+[gd_scene load_steps=40 format=4 uid="uid://qp37dgj8cpxa"]
 
-[ext_resource type="Script" uid="uid://co2rhmxa0n8nl" path="res://src/bgmusic.gd" id="1_0uv0p"]
 [ext_resource type="PackedScene" uid="uid://qqx1flhdjocc" path="res://scenes/Player.tscn" id="1_32lhk"]
+[ext_resource type="Script" uid="uid://dupm7hkrx1ocv" path="res://src/World.gd" id="1_c0d7e"]
 [ext_resource type="TileSet" uid="uid://cqvpm7ioxpo42" path="res://assets/tilemaps/tileset.tres" id="1_kqs1s"]
 [ext_resource type="Script" uid="uid://qbdl7rxcywtn" path="res://src/area_2d.gd" id="2_1lgw5"]
 [ext_resource type="Script" uid="uid://gi8bx4osqd6g" path="res://src/Player.gd" id="2_7g83o"]
-[ext_resource type="Script" path="res://src/Camera.gd" id="4_d1c63"]
+[ext_resource type="Script" uid="uid://gtqa40mdqgi6" path="res://src/Camera.gd" id="4_d1c63"]
 [ext_resource type="Script" uid="uid://ducx5yelgj345" path="res://src/key.gd" id="6_c0d7e"]
 [ext_resource type="Script" uid="uid://c8jelaiwx0kw4" path="res://src/switch.gd" id="6_hlk0d"]
 [ext_resource type="AudioStream" uid="uid://calsww5w0tgdp" path="res://assets/bg music_dungeon.mp3" id="8_b3faq"]
+[ext_resource type="Script" uid="uid://bb1wrbbcgolg4" path="res://src/Enemy.gd" id="9_o1tcx"]
 [ext_resource type="Texture2D" uid="uid://ditkpnl8x7cxw" path="res://assets/keys.png" id="10_nrtoj"]
 [ext_resource type="Texture2D" uid="uid://bng5lxf4urnxo" path="res://assets/bone_man.png" id="10_pdh0q"]
+[ext_resource type="Script" uid="uid://c857khtsisd6s" path="res://src/CombatantDetails.gd" id="10_rpuxp"]
 [ext_resource type="Texture2D" uid="uid://hgqjt7kf0wp6" path="res://assets/slime_spritesheet.png" id="11_h1bdy"]
 [ext_resource type="Texture2D" uid="uid://coibmea0ve10j" path="res://assets/fireenemy_spritesheet.png" id="12_7c4bj"]
+[ext_resource type="PackedScene" uid="uid://budt11vpa7l0x" path="res://scenes/BattleInterface.tscn" id="12_nthub"]
+[ext_resource type="SpriteFrames" uid="uid://b6tu7dcha7y51" path="res://assets/slime_animation.tres" id="13_44lqw"]
 [ext_resource type="Script" uid="uid://4b4mikas3gp5" path="res://src/EventController.gd" id="14_o1tcx"]
 [ext_resource type="Script" uid="uid://dihf641oyj66c" path="res://src/key_ui.gd" id="15_rpuxp"]
 
@@ -83,7 +87,7 @@ region = Rect2(16, 0, 16, 32)
 atlas = ExtResource("11_h1bdy")
 region = Rect2(32, 0, 16, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_o1tcx"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_44lqw"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -100,8 +104,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Resource" id="Resource_dwmkc"]
+script = ExtResource("10_rpuxp")
+max_hp = 10
+sprite_frames = SubResource("SpriteFrames_44lqw")
+metadata/_custom_type_script = "uid://c857khtsisd6s"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rpuxp"]
-size = Vector2(16, 13)
+size = Vector2(34, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o1tcx"]
 atlas = ExtResource("12_7c4bj")
@@ -128,7 +138,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44lqw"]
 
 [node name="World" type="Node2D"]
-script = ExtResource("1_0uv0p")
+script = ExtResource("1_c0d7e")
 
 [node name="FloorTileMap" type="TileMapLayer" parent="."]
 position = Vector2(1, 11)
@@ -196,16 +206,19 @@ shape = SubResource("RectangleShape2D_i4b1j")
 
 [node name="slime" type="Area2D" parent="."]
 position = Vector2(-278, -15)
+script = ExtResource("9_o1tcx")
+details = SubResource("Resource_dwmkc")
+battle_scene = ExtResource("12_nthub")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="slime"]
 position = Vector2(61, 14)
-sprite_frames = SubResource("SpriteFrames_o1tcx")
+sprite_frames = ExtResource("13_44lqw")
 autoplay = "default"
 frame = 1
 frame_progress = 0.0019814505
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slime"]
-position = Vector2(62, 14.5)
+position = Vector2(62, 15)
 shape = SubResource("RectangleShape2D_rpuxp")
 
 [node name="fire" type="Area2D" parent="."]
@@ -264,3 +277,4 @@ text = "hi"
 [connection signal="pressed" from="switch" to="switch" method="_on_pressed"]
 [connection signal="body_entered" from="key" to="." method="_on_key_body_entered"]
 [connection signal="pressed" from="bonemanb" to="." method="_on_bonemanb_pressed"]
+[connection signal="body_entered" from="slime" to="slime" method="_on_body_entered"]
