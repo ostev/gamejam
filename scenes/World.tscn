@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://qp37dgj8cpxa"]
+[gd_scene load_steps=36 format=4 uid="uid://qp37dgj8cpxa"]
 
 [ext_resource type="PackedScene" uid="uid://qqx1flhdjocc" path="res://scenes/Player.tscn" id="1_32lhk"]
 [ext_resource type="Script" uid="uid://dupm7hkrx1ocv" path="res://src/World.gd" id="1_c0d7e"]
@@ -10,13 +10,13 @@
 [ext_resource type="Script" uid="uid://c8jelaiwx0kw4" path="res://src/switch.gd" id="6_hlk0d"]
 [ext_resource type="AudioStream" uid="uid://calsww5w0tgdp" path="res://assets/bg music_dungeon.mp3" id="8_b3faq"]
 [ext_resource type="Script" uid="uid://bb1wrbbcgolg4" path="res://src/Enemy.gd" id="9_o1tcx"]
+[ext_resource type="SpriteFrames" uid="uid://cxhamsn54xhel" path="res://assets/boneman_animation.tres" id="10_44lqw"]
 [ext_resource type="Texture2D" uid="uid://ditkpnl8x7cxw" path="res://assets/keys.png" id="10_nrtoj"]
-[ext_resource type="Texture2D" uid="uid://bng5lxf4urnxo" path="res://assets/bone_man.png" id="10_pdh0q"]
 [ext_resource type="Script" uid="uid://c857khtsisd6s" path="res://src/CombatantDetails.gd" id="10_rpuxp"]
 [ext_resource type="Texture2D" uid="uid://hgqjt7kf0wp6" path="res://assets/slime_spritesheet.png" id="11_h1bdy"]
-[ext_resource type="Texture2D" uid="uid://coibmea0ve10j" path="res://assets/fireenemy_spritesheet.png" id="12_7c4bj"]
 [ext_resource type="PackedScene" uid="uid://budt11vpa7l0x" path="res://scenes/BattleInterface.tscn" id="12_nthub"]
 [ext_resource type="SpriteFrames" uid="uid://b6tu7dcha7y51" path="res://assets/slime_animation.tres" id="13_44lqw"]
+[ext_resource type="SpriteFrames" uid="uid://huijypnadayw" path="res://assets/fire_animation.tres" id="14_44lqw"]
 [ext_resource type="Script" uid="uid://4b4mikas3gp5" path="res://src/EventController.gd" id="14_o1tcx"]
 [ext_resource type="Script" uid="uid://dihf641oyj66c" path="res://src/key_ui.gd" id="15_rpuxp"]
 
@@ -50,30 +50,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1bdy"]
 size = Vector2(9, 13)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h1bdy"]
-atlas = ExtResource("10_pdh0q")
-region = Rect2(0, 0, 16, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7c4bj"]
-atlas = ExtResource("10_pdh0q")
-region = Rect2(16, 0, 16, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nrtoj"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h1bdy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7c4bj")
-}],
-"loop": true,
-"name": &"default",
-"speed": 3.0
-}]
+[sub_resource type="Resource" id="Resource_30fn3"]
+script = ExtResource("10_rpuxp")
+max_hp = 30
+name = "Boneman"
+metadata/_custom_type_script = "uid://c857khtsisd6s"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i4b1j"]
-size = Vector2(20, 29.5)
+size = Vector2(57, 58)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nrtoj"]
 atlas = ExtResource("11_h1bdy")
@@ -111,31 +95,17 @@ sprite_frames = SubResource("SpriteFrames_44lqw")
 metadata/_custom_type_script = "uid://c857khtsisd6s"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rpuxp"]
-size = Vector2(34, 34)
+size = Vector2(35, 34)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o1tcx"]
-atlas = ExtResource("12_7c4bj")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rpuxp"]
-atlas = ExtResource("12_7c4bj")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nthub"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o1tcx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rpuxp")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="Resource" id="Resource_44lqw"]
+script = ExtResource("10_rpuxp")
+max_hp = 20
+name = "Fire"
+sprite_frames = ExtResource("14_44lqw")
+metadata/_custom_type_script = "uid://c857khtsisd6s"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44lqw"]
+size = Vector2(102, 112)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_c0d7e")
@@ -186,22 +156,18 @@ autoplay = "float"
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_h1bdy")
 
-[node name="bonemanb" type="Button" parent="."]
-offset_left = -62.0
-offset_top = 172.0
-offset_right = -47.0
-offset_bottom = 200.0
-
 [node name="boneman" type="Area2D" parent="."]
 position = Vector2(-239, 42)
+script = ExtResource("9_o1tcx")
+details = SubResource("Resource_30fn3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="boneman"]
 position = Vector2(184, 146)
-sprite_frames = SubResource("SpriteFrames_nrtoj")
+sprite_frames = ExtResource("10_44lqw")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="boneman"]
-position = Vector2(184, 145)
+position = Vector2(186.5, 141)
 shape = SubResource("RectangleShape2D_i4b1j")
 
 [node name="slime" type="Area2D" parent="."]
@@ -218,18 +184,20 @@ frame = 1
 frame_progress = 0.0019814505
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slime"]
-position = Vector2(62, 15)
+position = Vector2(62.5, 15)
 shape = SubResource("RectangleShape2D_rpuxp")
 
 [node name="fire" type="Area2D" parent="."]
 position = Vector2(360, -137)
+script = ExtResource("9_o1tcx")
+details = SubResource("Resource_44lqw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fire"]
-sprite_frames = SubResource("SpriteFrames_nthub")
+sprite_frames = ExtResource("14_44lqw")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="fire"]
-position = Vector2(1, -1)
+position = Vector2(25, 20)
 shape = SubResource("RectangleShape2D_44lqw")
 
 [node name="Player" parent="." instance=ExtResource("1_32lhk")]
@@ -241,14 +209,6 @@ zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 script = ExtResource("4_d1c63")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -47.0
-offset_top = 175.0
-offset_right = -7.0
-offset_bottom = 215.0
-theme_override_font_sizes/normal_font_size = 10
-text = "Click to fight"
 
 [node name="EventController" type="Node2D" parent="."]
 script = ExtResource("14_o1tcx")
@@ -276,5 +236,6 @@ text = "hi"
 [connection signal="child_exiting_tree" from="WallsTileMap/Area2D/CollisionShape2D" to="WallsTileMap/Area2D" method="_on_collision_shape_2d_child_exiting_tree"]
 [connection signal="pressed" from="switch" to="switch" method="_on_pressed"]
 [connection signal="body_entered" from="key" to="." method="_on_key_body_entered"]
-[connection signal="pressed" from="bonemanb" to="." method="_on_bonemanb_pressed"]
+[connection signal="body_entered" from="boneman" to="boneman" method="_on_body_entered"]
 [connection signal="body_entered" from="slime" to="slime" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="fire" to="fire" method="_on_body_shape_entered"]
