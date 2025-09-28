@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://budt11vpa7l0x"]
+[gd_scene load_steps=12 format=3 uid="uid://budt11vpa7l0x"]
 
 [ext_resource type="PackedScene" uid="uid://cbhlkm2jg87li" path="res://scenes/CombatantUI.tscn" id="1_7moto"]
 [ext_resource type="Script" uid="uid://l08hv0qk8605" path="res://src/EncounterUIManager.gd" id="1_itadv"]
 [ext_resource type="Script" uid="uid://c857khtsisd6s" path="res://src/CombatantDetails.gd" id="2_2u5e8"]
 [ext_resource type="Script" uid="uid://bt4e3r06vflvt" path="res://src/Encounter.gd" id="2_107yi"]
 [ext_resource type="Texture2D" uid="uid://d1uskpen07acg" path="res://assets/hector_frontview.png" id="3_w3uxd"]
+[ext_resource type="Texture2D" uid="uid://dnono75bcbu5k" path="res://assets/fight_bvg.png" id="5_w3uxd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fix10"]
 animations = [{
@@ -57,6 +58,13 @@ grow_vertical = 2
 script = ExtResource("1_itadv")
 encounter = SubResource("Resource_v40jm")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1925.0
+offset_bottom = 1125.0
+texture = ExtResource("5_w3uxd")
+stretch_mode = 4
+
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
@@ -79,7 +87,7 @@ theme_override_constants/margin_top = 100
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 700
+theme_override_constants/separation = 650
 
 [node name="CombatantUI1" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_7moto")]
 layout_mode = 2
@@ -120,4 +128,6 @@ text = "Action points: 3"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ButtonsContainer/Button" to="." method="_on_bitey_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ButtonsContainer/Button2" to="." method="_on_stab_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ButtonsContainer/Button3" to="." method="_on_slurp_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/ButtonsContainer/Button4" to="." method="_on_end_turn_pressed"]

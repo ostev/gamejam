@@ -49,8 +49,14 @@ func _set_action_points(new_action_points: int) -> void:
 func _perform_action():
 	_set_action_points(action_points - 2)
 
+func _perform_bonus_action():
+	_set_action_points(action_points - 1)
+
 func _can_perform_action() -> bool:
-	return action_points > 2
+	return action_points >= 2
+
+func _can_perform_bonus_action() -> bool:
+	return action_points >= 1
 
 func _on_bitey_button_pressed() -> void:
 	if _can_perform_action():
@@ -62,3 +68,14 @@ func kill(index):
 		get_tree().change_scene_to_file("res://scenes/World.tscn")
 	elif index == 1:
 		get_tree().change_scene_to_file("res://scenes/Win.tscn")
+
+
+func _on_slurp_pressed() -> void:
+	if _can_perform_bonus_action():
+		_perform_bonus_action()
+		combatant2.damage(2)
+
+func _on_stab_pressed() -> void:
+	if _can_perform_action():
+		_perform_action()
+		combatant2.damage(5)

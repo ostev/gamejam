@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://qp37dgj8cpxa"]
+[gd_scene load_steps=37 format=4 uid="uid://qp37dgj8cpxa"]
 
 [ext_resource type="PackedScene" uid="uid://qqx1flhdjocc" path="res://scenes/Player.tscn" id="1_32lhk"]
 [ext_resource type="Script" uid="uid://dupm7hkrx1ocv" path="res://src/World.gd" id="1_c0d7e"]
@@ -18,6 +18,7 @@
 [ext_resource type="SpriteFrames" uid="uid://b6tu7dcha7y51" path="res://assets/slime_animation.tres" id="13_44lqw"]
 [ext_resource type="SpriteFrames" uid="uid://huijypnadayw" path="res://assets/fire_animation.tres" id="14_44lqw"]
 [ext_resource type="Script" uid="uid://4b4mikas3gp5" path="res://src/EventController.gd" id="14_o1tcx"]
+[ext_resource type="PackedScene" uid="uid://cnnhcsqx85ght" path="res://scenes/FireInterface.tscn" id="15_dwmkc"]
 [ext_resource type="Script" uid="uid://dihf641oyj66c" path="res://src/key_ui.gd" id="15_rpuxp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1lgw5"]
@@ -54,10 +55,12 @@ size = Vector2(9, 13)
 script = ExtResource("10_rpuxp")
 max_hp = 30
 name = "Boneman"
+sprite_frames = ExtResource("10_44lqw")
+index = 1
 metadata/_custom_type_script = "uid://c857khtsisd6s"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i4b1j"]
-size = Vector2(57, 58)
+size = Vector2(51, 49)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nrtoj"]
 atlas = ExtResource("11_h1bdy")
@@ -91,6 +94,7 @@ animations = [{
 [sub_resource type="Resource" id="Resource_dwmkc"]
 script = ExtResource("10_rpuxp")
 max_hp = 10
+name = "Slime"
 sprite_frames = SubResource("SpriteFrames_44lqw")
 metadata/_custom_type_script = "uid://c857khtsisd6s"
 
@@ -102,10 +106,11 @@ script = ExtResource("10_rpuxp")
 max_hp = 20
 name = "Fire"
 sprite_frames = ExtResource("14_44lqw")
+index = 2
 metadata/_custom_type_script = "uid://c857khtsisd6s"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_44lqw"]
-size = Vector2(102, 112)
+size = Vector2(65, 71)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_c0d7e")
@@ -167,7 +172,7 @@ sprite_frames = ExtResource("10_44lqw")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="boneman"]
-position = Vector2(186.5, 141)
+position = Vector2(183.5, 140.5)
 shape = SubResource("RectangleShape2D_i4b1j")
 
 [node name="slime" type="Area2D" parent="."]
@@ -191,13 +196,14 @@ shape = SubResource("RectangleShape2D_rpuxp")
 position = Vector2(360, -137)
 script = ExtResource("9_o1tcx")
 details = SubResource("Resource_44lqw")
+battle_scene = ExtResource("15_dwmkc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fire"]
 sprite_frames = ExtResource("14_44lqw")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="fire"]
-position = Vector2(25, 20)
+position = Vector2(11.5, 2.5)
 shape = SubResource("RectangleShape2D_44lqw")
 
 [node name="Player" parent="." instance=ExtResource("1_32lhk")]
@@ -238,4 +244,4 @@ text = "hi"
 [connection signal="body_entered" from="key" to="." method="_on_key_body_entered"]
 [connection signal="body_entered" from="boneman" to="boneman" method="_on_body_entered"]
 [connection signal="body_entered" from="slime" to="slime" method="_on_body_entered"]
-[connection signal="body_shape_entered" from="fire" to="fire" method="_on_body_shape_entered"]
+[connection signal="body_entered" from="fire" to="fire" method="_on_body_entered"]

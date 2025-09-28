@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://ud2nl5maqbn1"]
+
+[ext_resource type="PackedScene" uid="uid://budt11vpa7l0x" path="res://scenes/BattleInterface.tscn" id="1_3qyan"]
+[ext_resource type="Script" uid="uid://c857khtsisd6s" path="res://src/CombatantDetails.gd" id="2_acx6p"]
+[ext_resource type="Texture2D" uid="uid://d1uskpen07acg" path="res://assets/hector_frontview.png" id="3_11f1f"]
+[ext_resource type="SpriteFrames" uid="uid://cxhamsn54xhel" path="res://assets/boneman_animation.tres" id="4_3qyan"]
+[ext_resource type="Script" uid="uid://bt4e3r06vflvt" path="res://src/Encounter.gd" id="5_ywxdl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fix10"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_11f1f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_0kfng"]
+script = ExtResource("2_acx6p")
+max_hp = 40
+name = "Hector"
+sprite_frames = SubResource("SpriteFrames_fix10")
+metadata/_custom_type_script = "uid://c857khtsisd6s"
+
+[sub_resource type="Resource" id="Resource_edl67"]
+script = ExtResource("2_acx6p")
+max_hp = 10
+name = "Boneman"
+sprite_frames = ExtResource("4_3qyan")
+metadata/_custom_type_script = "uid://c857khtsisd6s"
+
+[sub_resource type="Resource" id="Resource_itn40"]
+script = ExtResource("5_ywxdl")
+combatants = [SubResource("Resource_0kfng"), SubResource("Resource_edl67")]
+metadata/_custom_type_script = "uid://bt4e3r06vflvt"
+
+[node name="SlimeInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="BattleInterface" parent="." instance=ExtResource("1_3qyan")]
+layout_mode = 1
+offset_left = 2.0
+offset_right = 2.0
+encounter = SubResource("Resource_itn40")
