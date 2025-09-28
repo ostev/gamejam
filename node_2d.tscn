@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsm2t522nd03d"]
+
+[ext_resource type="PackedScene" uid="uid://32tw808dmdkv" path="res://scenes/key.tscn" id="1_0e48y"]
+[ext_resource type="Texture2D" uid="uid://ditkpnl8x7cxw" path="res://assets/keys.png" id="2_epypp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fttkb"]
+atlas = ExtResource("2_epypp")
+region = Rect2(0, 0, 56, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy8tx"]
+atlas = ExtResource("2_epypp")
+region = Rect2(56, 0, 56, 58)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0hol4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fttkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy8tx")
+}],
+"loop": true,
+"name": &"float",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6r6c"]
+size = Vector2(30, 47)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Key" parent="." instance=ExtResource("1_0e48y")]
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Key"]
+sprite_frames = SubResource("SpriteFrames_0hol4")
+animation = &"float"
+autoplay = "float"
+
+[node name="Area2D2" type="Area2D" parent="Key"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Key/Area2D2"]
+position = Vector2(-1, 4.5)
+shape = SubResource("RectangleShape2D_q6r6c")

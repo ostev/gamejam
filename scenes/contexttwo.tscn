@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7yxeabymlc8j"]
+
+[ext_resource type="Texture2D" uid="uid://bkgx164hgv2k8" path="res://assets/title_art.png" id="1_apae3"]
+[ext_resource type="Script" uid="uid://c3p74idfwcoxt" path="res://scenes/writing.gd" id="2_7niuq"]
+[ext_resource type="Script" uid="uid://dooo3vhs5c4en" path="res://tiltepage.gd" id="2_ia0lv"]
+
+[node name="contexttwo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1914.0
+offset_bottom = 1066.0
+texture = ExtResource("1_apae3")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 527.0
+offset_top = 292.0
+offset_right = 1492.0
+offset_bottom = 649.0
+theme_override_font_sizes/normal_font_size = 70
+text = "I know! You can bargain your way back. Grab a few souls on the way. "
+script = ExtResource("2_7niuq")
+
+[node name="nexttwo" type="Button" parent="."]
+layout_mode = 0
+offset_left = 671.0
+offset_top = 893.0
+offset_right = 1264.0
+offset_bottom = 1017.0
+theme_override_font_sizes/font_size = 90
+text = "Let's do this."
+script = ExtResource("2_ia0lv")
+
+[connection signal="pressed" from="nexttwo" to="nexttwo" method="_on_pressed"]
